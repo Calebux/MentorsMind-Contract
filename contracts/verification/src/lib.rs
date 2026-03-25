@@ -63,7 +63,7 @@ impl VerificationContract {
             env.storage().persistent().set(&tkey, &0i32);
         }
         env.events()
-            .publish((symbol_short!("mentor_verified"), mentor), (rec.credential_hash, rec.expiry, rec.verified_at));
+            .publish((symbol_short!("verified"), mentor), (rec.credential_hash, rec.expiry, rec.verified_at));
     }
 
     /// Revoke a mentor's verification (admin only).
@@ -92,7 +92,7 @@ impl VerificationContract {
         rec.is_active = false;
         env.storage().persistent().set(&key, &rec);
         env.events()
-            .publish((symbol_short!("verification_revoked"), mentor), ());
+            .publish((symbol_short!("revoked"), mentor), ());
     }
 
     pub fn is_verified(env: Env, mentor: Address) -> bool {
